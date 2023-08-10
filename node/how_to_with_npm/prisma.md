@@ -2,12 +2,12 @@
 
 [Prisma](https://prisma.io) has been one of our top requested modules to work
 with in Deno. The demand is understandable, given that Prisma's developer
-experience is top notch and plays well with so many persistent data storage
+experience is top-notch and plays well with so many persistent data storage
 technologies.
 
 We're excited to show you how to use Prisma with Deno.
 
-In this How To guide, we'll setup a simple RESTful API in Deno using Oak and
+In this How To guide, we'll set up a simple RESTful API in Deno using Oak and
 Prisma.
 
 Let's get started.
@@ -27,7 +27,7 @@ cd rest-api-with-prisma-oak
 Then, let's run `prisma init` with Deno:
 
 ```shell, ignore
-deno run --allow-read --allow-env --allow-write npm:prisma@^4.5 init
+deno run -A npm:prisma@^5.1.1 init
 ```
 
 This will generate
@@ -36,9 +36,9 @@ Let's update it with the following:
 
 ```ts, ignore
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["deno"]
-  output = "../generated/client"
+  output          = "../generated/client"
 }
 
 datasource db {
@@ -47,26 +47,26 @@ datasource db {
 }
 
 model Dinosaur {
-  id          Int     @id @default(autoincrement())
-  name        String  @unique
+  id          Int    @id @default(autoincrement())
+  name        String @unique
   description String
 }
 ```
 
 Prisma should also have generated a `.env` file with `DATABASE_URL`. Let's
-assign `DATABASE_URL` to a PostreSQL connection string. In this example, we'll
+assign `DATABASE_URL` to a PostgreSQL connection string. In this example, we'll
 use a free [PostgreSQL database from Supabase](https://supabase.com/database).
 
 Next, let's create the database schema:
 
 ```shell, ignore
-deno run -A npm:prisma@^4.5 db push
+deno run -A npm:prisma@^5.1.1 db push
 ```
 
 After that's complete, we'll need to generate a Prisma client for Data Proxy:
 
 ```shell, ignore
-deno run -A --unstable npm:prisma@^4.5 generate --data-proxy
+deno run -A npm:prisma@^5.1.1 generate --data-proxy
 ```
 
 ## Setup Prisma Data Platform
